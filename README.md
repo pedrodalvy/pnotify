@@ -4,11 +4,11 @@
   <img src="includes/logo.png" alt="PNotify" />
 </div>
 
-A JavaScript notification and [confirmation/prompt](http://sciactive.com/pnotify/#confirm-module) library.
+A JavaScript/TypeScript notification, confirmation, and prompt library.
 
-PNotify can provide [desktop notifications](http://sciactive.com/pnotify/#web-notifications) based on the [Web Notifications spec](http://www.w3.org/TR/notifications/) with fall back to an in-browser notice.
+Notifications can display as toast style, snackbar style, banners, dialogs, alerts, or desktop notifications (using the [Web Notifications spec](http://www.w3.org/TR/notifications/)) with fall back to an in-browser notice.
 
-PNotify implements a unique notification flow called [modalish](https://sciactive.com/2020/02/11/the-modalish-notification-flow/) that provides a good user experience, even when many notifications are shown at once.
+PNotify provides a unique notification flow called [modalish](https://sciactive.com/2020/02/11/the-modalish-notification-flow/) that provides a good user experience, even when many notifications are shown at once.
 
 <h1>Demos</h1>
 
@@ -19,40 +19,42 @@ Development - https://sciactive.github.io/pnotify/
 <h1>Table of Contents</h1>
 
 <!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
-- [Getting Started](#getting-started)
-  - [Migrating from PNotify 4](#migrating-from-pnotify-4)
-- [Installation](#installation)
-  - [Svelte](#svelte)
-  - [React](#react)
-  - [Angular](#angular)
-  - [Angular (Injectable)](#angular-injectable)
-  - [AngularJS](#angularjs)
-  - [Vanilla JS (ES5)](#vanilla-js-es5)
-  - [Vanilla JS (ES6)](#vanilla-js-es6)
-- [Styles](#styles)
-  - [Bright Theme](#bright-theme)
-  - [Material](#material)
-    - [Material Icons](#material-icons)
-  - [Bootstrap](#bootstrap)
-  - [Font Awesome 4 (Icons)](#font-awesome-4-icons)
-  - [Font Awesome 5 (Icons)](#font-awesome-5-icons)
-- [Creating Notices](#creating-notices)
-- [Options](#options)
-  - [Changing Defaults](#changing-defaults)
-- [Modules](#modules)
-  - [Creating Notices with Modules](#creating-notices-with-modules)
-  - [Desktop Module](#desktop-module)
-  - [Mobile Module](#mobile-module)
-  - [Countdown Module](#countdown-module)
-  - [Animate Module](#animate-module)
-  - [Confirm Module](#confirm-module)
-- [Exported Methods and Properties](#exported-methods-and-properties)
-- [Instance Methods and Properties](#instance-methods-and-properties)
-  - [Events](#events)
-- [Stacks](#stacks)
-  - [Example Stack](#example-stack)
-- [Features](#features)
-- [Licensing and Additional Info](#licensing-and-additional-info)
+- [Getting Started](#Getting-Started)
+  - [Documentation for Old Versions](#Documentation-for-Old-Versions)
+  - [Migrating from PNotify 4](#Migrating-from-PNotify-4)
+- [Installation](#Installation)
+  - [Svelte](#Svelte)
+  - [React](#React)
+  - [Angular](#Angular)
+  - [Angular (Injectable)](#Angular-Injectable)
+  - [AngularJS](#AngularJS)
+  - [Vanilla JS (ES5)](#Vanilla-JS-ES5)
+  - [Vanilla JS (ES6)](#Vanilla-JS-ES6)
+- [Styles](#Styles)
+  - [Bright Theme](#Bright-Theme)
+  - [Material](#Material)
+    - [Material Icons](#Material-Icons)
+  - [Bootstrap](#Bootstrap)
+  - [Font Awesome 4 (Icons)](#Font-Awesome-4-Icons)
+  - [Font Awesome 5 (Icons)](#Font-Awesome-5-Icons)
+- [Creating Notices](#Creating-Notices)
+- [Options](#Options)
+  - [Changing Defaults](#Changing-Defaults)
+- [Modules](#Modules)
+  - [Creating Notices with Modules](#Creating-Notices-with-Modules)
+    - [TypeScript](#TypeScript)
+  - [Desktop Module](#Desktop-Module)
+  - [Mobile Module](#Mobile-Module)
+  - [Countdown Module](#Countdown-Module)
+  - [Animate Module](#Animate-Module)
+  - [Confirm Module](#Confirm-Module)
+- [Exported Methods and Properties](#Exported-Methods-and-Properties)
+- [Instance Methods and Properties](#Instance-Methods-and-Properties)
+  - [Events](#Events)
+- [Stacks](#Stacks)
+  - [Example Stack](#Example-Stack)
+- [Features](#Features)
+- [Licensing and Additional Info](#Licensing-and-Additional-Info)
 <!-- TOC END -->
 
 # Getting Started
@@ -84,6 +86,11 @@ npm install --save-dev @pnotify/mobile
 # Or, you can install this to get them all (if you're lazy).
 npm install --save pnotify
 ```
+
+## Documentation for Old Versions
+
+* [Readme for v4](https://github.com/sciactive/pnotify/blob/v4/README.md) on the [v4 branch](https://github.com/sciactive/pnotify/tree/v4).
+* [Readme for v3](https://github.com/sciactive/pnotify/blob/v3/README.md) on the [v3 branch](https://github.com/sciactive/pnotify/tree/v3).
 
 ## [Migrating from PNotify 4](MIGRATING.md)
 
@@ -458,9 +465,9 @@ PNotify options and default values.
 * `textTrusted: false`<br>
   Whether to trust the text or escape its contents. (Not allow HTML.)
 * `styling: 'brighttheme'`<br>
-  What styling classes to use. (Can be 'brighttheme', 'material', or a styling object.) (Note that the Bootstrap modules provide a different default.)
+  What styling classes to use. (Can be 'brighttheme', 'material', another string provided by a module, or a styling object.)
 * `icons: 'brighttheme'`<br>
-  What icons classes to use (Can be 'brighttheme', 'material', or an icon object.) (Note that the Font Awesome and Glyphicon modules provide a different default.)
+  What icons classes to use (Can be 'brighttheme', 'material', another string provided by a module, or an icon object.)
 * `mode: 'no-preference'`<br>
   Light or dark version of the theme, if supported by the styling. This overrides the CSS media query when a preference is given. (Can be 'no-preference', 'light', or 'dark'.)
 * `addClass: ''`<br>
@@ -589,7 +596,7 @@ defaultModules.set(PNotifyMobile, {});
 
 // Remove one of the default modules.
 notice({
-  text: "I don't have the PNotifyMobile module.",
+  text: "I don't have the Mobile module.",
   modules: new Map([
     ...[...defaultModules].filter(([mod]) => mod !== PNotifyMobile)
   ])
@@ -597,7 +604,7 @@ notice({
 
 // Add an additional module and options.
 notice({
-  text: "I use the PNotifyAnimate module in addition to the defaults.",
+  text: "I use the Animate module in addition to the defaults.",
   modules: new Map([
     ...defaultModules,
     [PNotifyAnimate, {
@@ -610,12 +617,41 @@ notice({
 // Don't worry about adding a module that's already in the defaults.
 // It's a Map, so only the last instance/options will end up in there.
 notice({
-  text: "I use the PNotifyMobile module with options I specify.",
+  text: "I use the Mobile module with options I specify.",
   modules: new Map([
     ...defaultModules,
     [PNotifyMobile, {
       swipeDismiss: false
     }]
+  ])
+});
+```
+
+### TypeScript
+
+Using modules with TypeScript requires types assertions for module entries, and possibly the `downlevelIteration` TypeScript option.
+
+```ts
+import {notice, defaultModules, Notice, ModuleEntry} from '@pnotify/core';
+import * as PNotifyConfirm from '@pnotify/confirm';
+
+notice({
+  text: "I'm a notice with modules, and my module options are checked by TypeScript.",
+  modules: new Map([
+    // This requires `"downlevelIteration": true` in your TypeScript config.
+    ...defaultModules,
+    [PNotifyConfirm, {
+      confirm: true,
+      buttons: [{
+        text: 'Ok',
+        primary: true,
+        click: (notice: Notice) => notice.close()
+      }]
+      // ***
+      // Notice the type assertion here. It tells TypeScript that the options
+      // are for the Confirm module.
+      // ***
+    }] as ModuleEntry<typeof PNotifyConfirm>,
   ])
 });
 ```
@@ -797,11 +833,7 @@ const myNotice = notice({
 buttons: [
   {
     text: 'Ok',
-    textTrusted: false,
-    addClass: '',
     primary: true,
-    // Whether to trigger this button when the user hits enter in a single line
-    // prompt. Also, focus the button if it is a modal prompt.
     promptTrigger: true,
     click: (notice, value) => {
       notice.close();
@@ -810,8 +842,6 @@ buttons: [
   },
   {
     text: 'Cancel',
-    textTrusted: false,
-    addClass: '',
     click: (notice) => {
       notice.close();
       notice.fire('pnotify:cancel', {notice});

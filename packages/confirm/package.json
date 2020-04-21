@@ -1,6 +1,6 @@
 {
   "name": "@pnotify/confirm",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "PNotify - Confirm Module",
   "keywords": [
     "notice",
@@ -35,11 +35,12 @@
   },
   "main": "dist/PNotifyConfirm.js",
   "svelte": "index.svelte",
+  "types": "index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@pnotify/core": "^5.0.1"
+    "@pnotify/core": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

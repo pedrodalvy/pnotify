@@ -1,6 +1,6 @@
 {
   "name": "@pnotify/core",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "PNotify Core",
   "keywords": [
     "notice",
@@ -37,6 +37,7 @@
   },
   "main": "dist/PNotify.js",
   "svelte": "index.svelte",
+  "types": "index.d.ts",
   "publishConfig": {
     "access": "public"
   },
